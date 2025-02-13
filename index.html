@@ -94,28 +94,5 @@ th {
   </tr>
 </table>
 </div>      
-
-<script type="application/xml" id="myXML"></script>
-
-<script>
-    const xmlString = document.getElementById("myXML").textContent;
-    console.log("XML Data:", xmlString);  
-
-    
-    const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(xmlString, "application/xml");
-
-    
-    const to = xmlDoc.getElementsByTagName("to")[0].textContent;
-    const from = xmlDoc.getElementsByTagName("from")[0].textContent;
-    const body = xmlDoc.getElementsByTagName("body")[0].textContent;
-
-    document.body.innerHTML += `
-        <p><strong>To:</strong> ${to}</p>
-        <p><strong>From:</strong> ${from}</p>
-        <p><strong>Message:</strong> ${body}</p>
-    `;
-</script>
-
 </body>
 </html>
