@@ -6,7 +6,6 @@
     <title>Data Table</title>
 </head>
 <style>
-<div style="overflow-x:auto;">
     
 table, td, th {
   border: 1px solid;
@@ -100,13 +99,13 @@ th {
 
 <script>
     const xmlString = document.getElementById("myXML").textContent;
-    console.log("XML Data:", xmlString);  // Log the XML to the console or use it in your application
+    console.log("XML Data:", xmlString);  
 
-    // Example: Parse the XML data
+    
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(xmlString, "application/xml");
 
-    // Extract and display data from the XML
+    
     const to = xmlDoc.getElementsByTagName("to")[0].textContent;
     const from = xmlDoc.getElementsByTagName("from")[0].textContent;
     const body = xmlDoc.getElementsByTagName("body")[0].textContent;
@@ -117,5 +116,6 @@ th {
         <p><strong>Message:</strong> ${body}</p>
     `;
 </script>
+
 </body>
 </html>
