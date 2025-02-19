@@ -7,64 +7,102 @@
 </head>
 <style>
     
-    table, td, th {
-            border: 1px solid;
+    body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #141E30, #243B55);
+            color: white;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        
+        .table-container {
+            max-width: 90%;
+            overflow-x: auto;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 20px;
+            margin: auto;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-left: auto;
-            margin-right: auto;
+            overflow: hidden;
+            border-radius: 10px;
         }
 
         th, td {
-            padding: 15px;
+            padding: 12px;
             text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
         }
 
         th {
-            background-color: #042baa;
-            color: white;
+            background: rgba(0, 0, 0, 0.5);
+            color: #FFD700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        
-        .table-container {
-            width: 100%;
-            overflow-x: auto; 
+        tr {
+            transition: all 0.3s ease;
         }
 
-     
-        @media screen and (max-width: 600px) {
+        tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        tr:hover {
+            background: rgba(0, 0, 0, 0.3);
+            transform: scale(1.02);
+            box-shadow: 0px 0px 15px #FFD700;
+        }
+
+        @media screen and (max-width: 768px) {
             table, thead, tbody, th, td, tr {
                 display: block;
             }
 
             thead tr {
-                display: none; 
+                display: none;
             }
 
             tr {
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
                 margin-bottom: 15px;
-                border: 1px solid #ddd;
                 padding: 10px;
             }
 
             td {
                 display: flex;
                 justify-content: space-between;
-                padding: 10px;
-                border-bottom: 1px solid #ddd;
+                padding: 12px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
                 position: relative;
+            }
+
+            td:last-child {
+                border-bottom: none;
             }
 
             td::before {
                 content: attr(data-label);
                 font-weight: bold;
                 text-transform: uppercase;
-                flex: 1;
-                padding-right: 10px;
-                color: #042baa;
+                color: #FFD700;
             }
         }
 </style>
