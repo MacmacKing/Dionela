@@ -1,1 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MacFlix</title>
+</head>
+<body>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #141414;
+            color: white;
+        }
 
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 30px;
+            background-color: #141414;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar .logo img {
+            width: 120px;
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .navbar .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .navbar .nav-links a:hover {
+            color: red;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar .user img {
+            width: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .banner {
+            background: url('banner-image.jpg') no-repeat center center/cover;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .banner h1 {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+
+        .banner button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .movie-row {
+            padding: 20px;
+        }
+
+        .movie-row-items {
+            display: flex;
+            flex-wrap: nowrap; 
+            overflow-x: auto;  
+            gap: 20px;        
+            padding-bottom: 10px; 
+            scroll-behavior: smooth; 
+        }
+
+        .movie-item {
+            min-width: 250px; 
+            background-color: #333;
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .movie-item:hover {
+            transform: scale(1.05); 
+            background-color: #444; 
+        }
+
+        .movie-item img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .movie-item:hover img {
+            transform: scale(1.1); 
+        }
+
+        .movie-row-items::-webkit-scrollbar {
+            height: 8px; 
+        }
+
+        .movie-row-items::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 10px;
+        }
+
+        .movie-row-items::-webkit-scrollbar-thumb:hover {
+            background-color: #555;
+        }
+
+        .movie-item h3 {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+
+        .movie-item p {
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        .footer {
+            padding: 20px;
+            background-color: #141414;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+    </style>
+
+    <header class="navbar">
+        <div class="logo">
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/025/322/804/small_2x/golden-letter-m-free-png.png" alt="Macflix Logo">
+        </div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Movies</a>
+            <a href="#">TV Shows</a>
+            <a href="#">New Releases</a>
+            <a href="#">My List</a>
+        </div>
+        <div class="user">
+            <img src="https://th.bing.com/th/id/R.945f33b643f2ceffcdae90fb57c61854?rik=Ox1dcxb6rfOngw&riu=http%3a%2f%2fgetdrawings.com%2ffree-icon-bw%2ffree-avatars-icons-25.png&ehk=i8VrSYUn0ZsIdAnnI51DInJ0WdIXd3ukvat6kwZC%2f3c%3d&risl=&pid=ImgRaw&r=0" alt="User Avatar">
+        </div>
+    </header>
+
+    <section class="banner">
+        <div class="banner-content">
+            <h1>Welcome to MacFlix</h1>
+            <p>Watch anywhere. Cancel anytime.</p>
+            <button>Sign In</button>
+        </div>
+    </section>
+
+    <section class="movie-row">
+        <h2>Top picks of Macmac</h2>
+        <div id="movies-container" class="movie-row-items">
+            
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2025 MacFlix. All Rights Reserved.</p>
+        <ul>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Terms of Use</a></li>
+            <li><a href="#">Help Center</a></li>
+        </ul>
+    </footer>
+
+    <script>
+        const xmlData = `
+        <movies>
+            <movie>
+                <title>Arrival</title>
+                <year>2016</year>
+                <director>Dennis Villeneuve</director>
+                <genre>Drama, Sci-Fi, Mystery</genre>
+                <synopsis>Taking place after alien crafts land around the world, an expert linguist is recruited by the military to determine whether they come in peace or are a threat.</synopsis>
+                <poster>https://image.tmdb.org/t/p/w600_and_h900_bestv2/x2FJsf1ElAgr63Y3PNPtJrcmpoe.jpg</poster>
+            </movie>
+            <movie>
+                <title>Life of Pi</title>
+                <year>2012</year>
+                <director>Ang Lee</director>
+                <genre>Adventure, Drama</genre>
+                <synopsis>The story of an Indian boy named Pi, a zookeeper's son who finds himself in the company of a hyena, zebra, orangutan, and a Bengal tiger after a shipwreck sets them adrift in the Pacific Ocean.</synopsis>
+                <poster>https://image.tmdb.org/t/p/w600_and_h900_bestv2/iLgRu4hhSr6V1uManX6ukDriiSc.jpg</poster>
+            </movie>
+            <movie>
+                <title>Captain America: Brave New World</title>
+                <year>2025</year>
+                <director>Julius Onah</director>
+                <genre>Action, Thriller, Sci-Fi</genre>
+                <synopsis>After meeting with newly elected U.S. President Thaddeus Ross, Sam finds himself in the middle of an international incident. He must discover the reason behind a nefarious global plot before the true mastermind has the entire world seeing red.</synopsis>
+                <poster>https://image.tmdb.org/t/p/w600_and_h900_bestv2/pzIddUEMWhWzfvLI3TwxUG2wGoi.jpg</poster>
+            </movie>
+            <movie>
+                <title>Interstellar</title>
+                <year>2014</year>
+                <director>Chrisopher Nolan</director>
+                <genre>Adventure, Drama, Sci-Fi</genre>
+                <synopsis>The adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel and conquer the vast distances involved in an interstellar voyage.</synopsis>
+                <poster>https://image.tmdb.org/t/p/w600_and_h900_bestv2/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg</poster>
+            </movie>
+            <movie>
+                <title>Forrest Gump</title>
+                <year>1994</year>
+                <director>Robert Zemeckis</director>
+                <genre>Comedy, Drama, Romance</genre>
+                <synopsis>A man with a low IQ has accomplished great things in his life and been present during significant historic events—in each case, far exceeding what anyone imagined he could do. But despite all he has achieved, his one true love eludes him.</synopsis>
+                <poster>https://image.tmdb.org/t/p/w600_and_h900_bestv2/arw2vcBveWOVZr6pxd9XTd1TdQa.jpg</poster>
+            </movie>
+            <movie>
+                <title>A Silent Voice: The Movie</title>
+                <year>2016</year>
+                <director>Naoko Yamada</director>
+                <genre>Animation, Drama, Romance</genre>
+                <synopsis>Shouya Ishida starts bullying the new girl in class, Shouko Nishimiya, because she is deaf. But as the teasing continues, the rest of the class starts to turn on Shouya for his lack of compassion. When they leave elementary school, Shouko and Shouya do not speak to each other again... until an older, wiser Shouya, tormented by his past behaviour, decides he must see Shouko once more. He wants to atone for his sins, but is it already too late...?</synopsis>
+                <poster>https://image.tmdb.org/t/p/w600_and_h900_bestv2/tuFaWiqX0TXoWu7DGNcmX3UW7sT.jpg</poster>
+            </movie>
+            <movie>
+                <title>Gifted</title>
+                <year>2017</year>
+                <director>Marc Webb</director>
+                <genre>Drama, Comdey</genre>
+                <synopsis>Frank, a single man raising his child prodigy niece Mary, is drawn into a custody battle with his mother.</synopsis>
+                <poster>https://image.tmdb.org/t/p/w600_and_h900_bestv2/7YB2YrMwIm1g8FyZtlvmVDfRnAT.jpg</poster>
+            </movie>
+        </movies>
+        `;
+
+        function parseXMLData(xmlString) {
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(xmlString, "text/xml");
+
+            const movies = xmlDoc.getElementsByTagName("movie");
+            const moviesContainer = document.getElementById("movies-container");
+
+            for (let i = 0; i < movies.length; i++) {
+                const title = movies[i].getElementsByTagName("title")[0].textContent;
+                const year = movies[i].getElementsByTagName("year")[0].textContent;
+                const director = movies[i].getElementsByTagName("director")[0].textContent;
+                const genre = movies[i].getElementsByTagName("genre")[0].textContent;
+                const synopsis = movies[i].getElementsByTagName("synopsis")[0].textContent;
+                const poster = movies[i].getElementsByTagName("poster")[0].textContent;
+
+                const movieItem = document.createElement("div");
+                movieItem.classList.add("movie-item");
+
+                const movieImg = document.createElement("img");
+                movieImg.src = poster;
+                movieImg.alt = title;
+
+                const movieTitle = document.createElement("h3");
+                movieTitle.textContent = title;
+
+                const movieYear = document.createElement("p");
+                movieYear.textContent = `Year: ${year}`;
+
+                const movieDirector = document.createElement("p");
+                movieDirector.textContent = `Director: ${director}`;
+
+                const movieGenre = document.createElement("p");
+                movieGenre.textContent = `Genre: ${genre}`;
+
+                const movieSynopsis = document.createElement("p");
+                movieSynopsis.textContent = `Synopsis: ${synopsis}`;
+
+                movieItem.appendChild(movieImg);
+                movieItem.appendChild(movieTitle);
+                movieItem.appendChild(movieYear);
+                movieItem.appendChild(movieDirector);
+                movieItem.appendChild(movieGenre);
+                movieItem.appendChild(movieSynopsis);
+
+                moviesContainer.appendChild(movieItem);
+            }
+        }
+
+      
+        parseXMLData(xmlData);
+    </script>
+</body>
+</html>
